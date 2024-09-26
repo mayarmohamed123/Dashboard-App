@@ -24,7 +24,7 @@ import { FiSettings } from "react-icons/fi";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 
 function App() {
-  const activeMenu = false;
+  const activeMenu = true;
   return (
     <div>
       <BrowserRouter>
@@ -42,7 +42,7 @@ function App() {
           </div>
           {activeMenu ? (
             <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-white">
-              Sidebar
+              <Sidebar />
             </div>
           ) : (
             <div className="w-0 dark:bg-secondary-dark-bg"> sidebar :</div>
@@ -53,7 +53,7 @@ function App() {
             }`}
           >
             <div className="fixed md:static bg-main-bg dark:bg-main-dark navbar w-full">
-              Navbar
+              <Navbar />
             </div>
           </div>
 
