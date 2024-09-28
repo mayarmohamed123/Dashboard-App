@@ -4,9 +4,15 @@ import { MdOutlineCancel } from "react-icons/md";
 import { SiShopware } from "react-icons/si";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import { links } from "../data/dummy";
+import { useStateContext } from "../contexts/ContextProvider";
 
 const Sidebar = () => {
-  const activeMenu = true;
+  const { activeMenu, setActiveMenu, screenSize } = useStateContext();
+  const handleCloseSidebar = () => {
+    if (activeMenu && screenSize <= 900) {
+      setActiveMenu(false);
+    }
+  };
   const activeLink =
     "flex item-center gap-5 pl-4 pb-2.5 pt-3 rounded-lg text-md text-red m-2";
   const normalLink =
@@ -18,7 +24,7 @@ const Sidebar = () => {
           <div className="flex justify-between items-center ">
             <Link
               to="/"
-              onClick={() => {}}
+              onClick={handleCloseSidebar}
               className="items-center gap-3 ml-3 mt-3 flex text-xl font-extrabold tracking-tight "
             >
               <SiShopware /> <span>Shopping</span>
@@ -26,7 +32,9 @@ const Sidebar = () => {
             <TooltipComponent content="Cancel" position="BottomCenter">
               <button
                 type="button"
-                onClick={() => {}}
+                onClick={() => {
+                  setActiveMenu((preState) => !preState);
+                }}
                 className="text-3xl rounded-full ml-4 hover:bg-light-gray block md:hidden p-3"
               >
                 <MdOutlineCancel />
@@ -43,7 +51,7 @@ const Sidebar = () => {
                   <NavLink
                     to={`\${link.name}`}
                     key={link.name}
-                    onClick={() => {}}
+                    onClick={handleCloseSidebar}
                     className={({ isActive }) =>
                       isActive ? activeLink : normalLink
                     }
